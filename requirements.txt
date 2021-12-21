@@ -70,4 +70,5 @@ wand
 wget
 git+https://github.com/goldsmith/Wikipedia
 youtube-search-python
-youtube_dl
+youtube_dl==2021.6.6
+pytgcalls==3.0.0.dev19
