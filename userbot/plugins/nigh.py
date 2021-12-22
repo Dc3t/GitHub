@@ -10,7 +10,7 @@ nightm_2: "Setted time successfully"
 nightm_3: "Done, Added Current Chat To Night Mode"
 nightm_4: "Done, Removed Current Chat from Night Mode"
 nightm_5: "Something Went Wrong"
-if night_grps():
+async def night_grps():
     try:
         h1, m1, h2, m2 = 0, 0, 7, 0
         if udB.get("NIGHT_TIME"):
