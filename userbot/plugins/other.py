@@ -33,7 +33,7 @@ async def dm(e):
         await eor(e, get_string("dm_4").format(m, HNDLR), time=5)
 
 
-@iqthon.iq_cmd(fwdreply ?(.*)", fullsudo=True)
+@iqthon.iq_cmd("fwdreply ?(.*)", fullsudo=True)
 async def _(e):
     message = e.pattern_match.group(1)
     if not e.reply_to_msg_id:
