@@ -35,7 +35,7 @@ async def add_grp(e):
     await edit_or_reply(e, get_string("nightm_3"))
 
 
-@ultroid_cmd(pattern="remnm ?(.*)")
+@iqthon.iq_cmd(pattern="remnm ?(.*)")
 async def rem_grp(e):
     pat = e.pattern_match.group(1)
     if pat:
