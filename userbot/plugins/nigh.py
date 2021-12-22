@@ -10,7 +10,17 @@ nightm_2: "Setted time successfully"
 nightm_3: "Done, Added Current Chat To Night Mode"
 nightm_4: "Done, Removed Current Chat from Night Mode"
 nightm_5: "Something Went Wrong"
-
+if night_grps():
+    try:
+        h1, m1, h2, m2 = 0, 0, 7, 0
+        if udB.get("NIGHT_TIME"):
+            h1, m1, h2, m2 = eval(udB["NIGHT_TIME"])
+        sch = AsyncIOScheduler()
+        sch.add_job(close_grp, trigger="cron", hour=h1, minute=m1)
+        sch.add_job(open_grp, trigger="cron", hour=h2, minute=m2)
+        sch.start()
+    except Exception as er:
+        LOGS.info(er)
 @iqthon.iq_cmd(pattern="nmtime ?(.*)")
 async def set_time(e):
     if not e.pattern_match.group(1):
@@ -112,14 +122,4 @@ async def close_grp():
             LOGS.info(er)
 
 
-if night_grps():
-    try:
-        h1, m1, h2, m2 = 0, 0, 7, 0
-        if udB.get("NIGHT_TIME"):
-            h1, m1, h2, m2 = eval(udB["NIGHT_TIME"])
-        sch = AsyncIOScheduler()
-        sch.add_job(close_grp, trigger="cron", hour=h1, minute=m1)
-        sch.add_job(open_grp, trigger="cron", hour=h2, minute=m2)
-        sch.start()
-    except Exception as er:
-        LOGS.info(er)
+
