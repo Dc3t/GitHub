@@ -5,7 +5,11 @@ from userbot import iqthon
 from userbot.utils import admin_cmd, sudo_cmd, eor
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
-
+nightm_1: "Give Time in correct format"
+nightm_2: "Setted time successfully"
+nightm_3: "Done, Added Current Chat To Night Mode"
+nightm_4: "Done, Removed Current Chat from Night Mode"
+nightm_5: "Something Went Wrong"
 
 @iqthon.iq_cmd(pattern="nmtime ?(.*)")
 async def set_time(e):
