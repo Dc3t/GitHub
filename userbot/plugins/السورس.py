@@ -254,6 +254,28 @@ async def _(event):
         pass
     except Exception as e:
         LOGS1.error(e)
+@iqthon.on(admin_cmd(pattern="مساعده(?:\s|$)([\s\S]*)"))
+async def permalink(mention):
+    await edit_or_reply(mention, f"""• لتغير كليشه سورس او  الفحص اضغط هنا  ↶
+https://t.me/Teamtelethon/36
+  • لتغير صوره او فيديو امر الفحص اضغط هنا ↶
+https://t.me/Teamtelethon/39
+  • لتغير كليشة امر حماية الخاص اضغط هنا ↶
+https://t.me/Teamtelethon/35
+  • لوضع صوره او فيديو في حماية الخاص اضغط هنا ↶
+https://t.me/Teamtelethon/38
+  • لتغير عدد تحذيرات حماية الخاص اضغط هنا ↶
+https://t.me/Teamtelethon/45
+  • لتغير نبذه الوقتيه اضغط هنا ↶
+https://t.me/Teamtelethon/54
+  • لتغير صوره وقتيه اضغط هنا ↶
+ https://t.me/Teamtelethon/46 
+  • لتغير خط زخرفه اسم وقتي اضغط هنا ↶
+ https://t.me/Teamtelethon/59
+  •  لوضع ايموجي بجانب اسم وقتي اضغط هنا ↶
+ https://t.me/Teamtelethon/37
+
+قناة الكلايش تجدها هنا : @FGFFG""")
 @iqthon.on(admin_cmd(pattern="اطفاء مؤقت( [0-9]+)?$"))    
 async def _(event):
     if " " not in event.pattern_match.group(1):
