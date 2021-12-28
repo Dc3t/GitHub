@@ -118,11 +118,11 @@ fahs = """.𓄌 : me  {my_mention}  𓇡.
 .𓄌 : up time  {uptime}  𓇡.
 .𓄌 : My Bot  {tg_bot}  𓇡.
 .𓄌 : ping  {ping}  𓇡.
-.𓄌 : version 7.2  𓇡.
+.𓄌 : version 7.3  𓇡.
 .𓄌 : Source TelethonArab : @iqthon  𓇡."""
 @iqthon.on(admin_cmd(pattern="رابط التنصيب(?: |$)(.*)"))    
 async def source(e):
-    await edit_or_reply(e, "https://dashboard.heroku.com/new?template=https://github.com/telethon-Arab/telethohelp",)
+    await edit_or_reply(e, "https://dashboard.heroku.com/new?template=https://github.com/telethon-Arab/TELETHONPACK",)
 @iqthon.on(admin_cmd(pattern="حساب كيثاب( -l(\d+))? ([\s\S]*)"))    
 async def _(event):
     reply_to = await reply_id(event)
