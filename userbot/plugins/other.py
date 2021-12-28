@@ -5,6 +5,7 @@ import re
 import requests
 import os
 import shutil
+import time
 from datetime import datetime
 from PIL import Image, ImageDraw, ImageFont
 from pySmartDL import SmartDL
@@ -398,7 +399,7 @@ TELEGRAPH_MEDIA_LINKS = [
 ]
 
 
-@iqthon.on(admin_cmd(pattern="rpc ?(.*)"))
+@iqthon.on(admin_cmd(pattern="انمي_تلقائي ?(.*)"))
 async def autopic(event):
     while True:
         piclink = random.randint(0, len(TELEGRAPH_MEDIA_LINKS) - 1)
@@ -412,19 +413,15 @@ async def autopic(event):
 
         shutil.copy(downloaded_file_name, photo)
         Image.open(photo)
-        current_time = datetime.now().strftime(
-            "\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n                                                   Time: %H:%M:%S \n                                                   Date: %d/%m/%y "
-        )
+        current_time = datetime.now().strftime(            "\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n                                                   Time: %I:%M:%S \n                                                   Date: %d/%m/%y "        )
         img = Image.open(photo)
         drawn_text = ImageDraw.Draw(img)
         fnt = ImageFont.truetype(FONT_FILE_TO_USE, 30)
         drawn_text.text((300, 450), current_time, font=fnt, fill=(255, 255, 255))
         img.save(photo)
-        file = await event.client.upload_file(photo)  # pylint:disable=E0602
+        file = await event.client.upload_file(photo)  
         try:
-            await event.client(
-                functions.photos.UploadProfilePhotoRequest(file)  # pylint:disable=E0602
-            )
+            await event.client(                functions.photos.UploadProfilePhotoRequest(file)  )
             os.remove(photo)
 
             await asyncio.sleep(60)
