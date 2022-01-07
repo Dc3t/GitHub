@@ -38,7 +38,7 @@ async def mentionall(event):
     return await event.respond("**استخدم الامر في مجموعه او قناه 💕🍂**")
   
   admins = []
-  async for admin in xavierbot.iter_participants(event.chat_id, filter=ChannelParticipantsAdmins):
+  async for admin in iqthon.iter_participants(event.chat_id, filter=ChannelParticipantsAdmins):
     admins.append(admin.id)
   if not event.sender_id in admins:
     return await event.respond("**يمكن للادمن فقط استخدام بوت التاك 🤓💕**")
@@ -60,14 +60,14 @@ async def mentionall(event):
     moment_worker.append(event.chat_id)
     usrnum = 0
     usrtxt = ""
-    async for usr in xavierbot.iter_participants(event.chat_id):
+    async for usr in iqthon.iter_participants(event.chat_id):
       usrnum += 1
       usrtxt += f"[{usr.first_name}](tg://user?id={usr.id}) "
       if event.chat_id not in moment_worker:
         await event.respond("تم التوقف!")
         return
       if usrnum == 5:
-        await xavierbot.send_message(event.chat_id, f"{usrtxt}\n\n{msg}")
+        await iqthon.send_message(event.chat_id, f"{usrtxt}\n\n{msg}")
         await asyncio.sleep(2)
         usrnum = 0
         usrtxt = ""
@@ -78,14 +78,14 @@ async def mentionall(event):
  
     usrnum = 0
     usrtxt = ""
-    async for usr in xavierbot.iter_participants(event.chat_id):
+    async for usr in iqthon.iter_participants(event.chat_id):
       usrnum += 1
       usrtxt += f"[{usr.first_name}](tg://user?id={usr.id}) "
       if event.chat_id not in moment_worker:
         await event.respond("**تم التوقف**")
         return
       if usrnum == 5:
-        await xavierbot.send_message(event.chat_id, usrtxt, reply_to=msg)
+        await iqthon.send_message(event.chat_id, usrtxt, reply_to=msg)
         await asyncio.sleep(2)
         usrnum = 0
         usrtxt = ""
