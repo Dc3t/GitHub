@@ -1,10 +1,14 @@
 import asyncio
 from datetime import datetime
+import os, logging
 
 from telethon.errors import BadRequestError, FloodWaitError, ForbiddenError
 
 from userbot import iqthon
-
+from telethon import Button
+from telethon import TelegramClient, events
+from telethon.sessions import StringSession
+from telethon.tl.types import ChannelParticipantsAdmins
 from ..Config import Config
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
@@ -27,7 +31,78 @@ plugin_category = "bot"
 botusername = Config.TG_BOT_USERNAME
 cmhd = Config.COMMAND_HAND_LER
 
+@iqthon.on(events.NewMessage(pattern="^/all?(.*)|/all|#tag?(.*)|#tag|@all?(.*)|@all"))
+async def mentionall(event):
+  global moment_worker
+  if event.is_private:
+    return await event.respond("**استخدم الامر في مجموعه او قناه 💕🍂**")
+  
+  admins = []
+  async for admin in xavierbot.iter_participants(event.chat_id, filter=ChannelParticipantsAdmins):
+    admins.append(admin.id)
+  if not event.sender_id in admins:
+    return await event.respond("**يمكن للادمن فقط استخدام بوت التاك 🤓💕**")
+  
+  if event.pattern_match.group(1):
+    mode = "text_on_cmd"
+    msg = event.pattern_match.group(1)
+  elif event.reply_to_msg_id:
+    mode = "text_on_reply"
+    msg = event.reply_to_msg_id
+    if msg == None:
+        return await event.respond("لا يمكنني ذكر الأعضاء في المنشور القديم !!")
+  elif event.pattern_match.group(1) and event.reply_to_msg_id:
+    return await event.respond("أعطني شيئاً. مثال: `/all هيي`")
+  else:
+    return await event.respond("قم بالرد علي رساله او اعطني بعض الكلمات لتاك 🤓💕")
+    
+  if mode == "text_on_cmd":
+    moment_worker.append(event.chat_id)
+    usrnum = 0
+    usrtxt = ""
+    async for usr in xavierbot.iter_participants(event.chat_id):
+      usrnum += 1
+      usrtxt += f"[{usr.first_name}](tg://user?id={usr.id}) "
+      if event.chat_id not in moment_worker:
+        await event.respond("تم التوقف!")
+        return
+      if usrnum == 5:
+        await xavierbot.send_message(event.chat_id, f"{usrtxt}\n\n{msg}")
+        await asyncio.sleep(2)
+        usrnum = 0
+        usrtxt = ""
+        
+  
+  if mode == "text_on_reply":
+    moment_worker.append(event.chat_id)
+ 
+    usrnum = 0
+    usrtxt = ""
+    async for usr in xavierbot.iter_participants(event.chat_id):
+      usrnum += 1
+      usrtxt += f"[{usr.first_name}](tg://user?id={usr.id}) "
+      if event.chat_id not in moment_worker:
+        await event.respond("**تم التوقف**")
+        return
+      if usrnum == 5:
+        await xavierbot.send_message(event.chat_id, usrtxt, reply_to=msg)
+        await asyncio.sleep(2)
+        usrnum = 0
+        usrtxt = ""
 
+
+#الغاء التاك
+
+@iqthon.on(events.NewMessage(pattern="^/cancel$|الغاء|/cancel|ايقاف"))
+async def cancel_mentionall(event):
+  if not event.chat_id in moment_worker:
+    return await event.respond('**لا يوجد عمليه تاك الان **')
+  else:
+    try:
+      moment_worker.remove(event.chat_id)
+    except:
+      pass
+    return await event.respond('**تم ايقاف التاك **')
 @iqthon.iq_cmd(
     pattern=f"^/مساعدة$",
     from_users=Config.OWNER_ID,
