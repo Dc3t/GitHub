@@ -4,13 +4,13 @@ from PIL import Image
 from userbot import iqthon
 
 
-@iqthon.iq_cmd(pattern="tiny(?: |$)(.*)")
+@iqthon.iq_cmd(pattern="سمول(?: |$)(.*)")
 async def ultiny(event):
     reply = await event.get_reply_message()
     if not (reply and (reply.media)):
-        await event.edit("`Balas Ke Pesan Sticker !`")
+        await event.edit("قم بالرد على صوره او ملصق لتصغيره")
         return
-    xx = await event.edit("`Processing tiny...`")
+    xx = await event.edit("جاري التصغير ...")
     ik = await event.client.download_media(reply)
     im1 = Image.open("SQL/blank.png")
     if ik.endswith(".tgs"):
