@@ -1,3 +1,11 @@
+TgCrypto
+pyrogram
+py-tgcalls==0.8.2
+asyncio
+python-arq
+youtube-search-python==1.4.6
+yt-dlp
+gTTS
 aiofiles
 aiohttp
 apscheduler
@@ -69,6 +77,5 @@ vcsi
 wand
 wget
 git+https://github.com/goldsmith/Wikipedia
-youtube-search-python
-youtube_dl==2021.6.6
+youtube_dl
 pytgcalls==3.0.0.dev19
