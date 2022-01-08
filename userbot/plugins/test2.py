@@ -16,9 +16,8 @@ from userbot.helpers.functions import (
     invert_colors,
     mirror_file,
     solarize,
-    take_screen_shot,
 )
-
+from userbot.helpers.utils import take_screen_shot
 async def runcmd(cmd: str) -> Tuple[str, str, int, int]:
     args = shlex.split(cmd)
     process = await asyncio.create_subprocess_exec(
