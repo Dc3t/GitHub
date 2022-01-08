@@ -64,6 +64,7 @@ thumb_image_path = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg"
 oldvars = {    "PM_PIC": "pmpermit_pic",
     "PM_TEXT": "pmpermit_txt",
     "PM_BLOCK": "pmblock",}
+alive = gvarstatus("alive") or "فحص"
 IQPIC = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/7fe6990ff2291b21af220.mp4"
 def convert_from_bytes(size):
     power = 2 ** 10
@@ -73,7 +74,7 @@ def convert_from_bytes(size):
         size /= power
         n += 1
     return f"{round(size, 2)} {units[n]}"
-@iqthon.on(admin_cmd(pattern="(فحص|السورس)(?: |$)(.*)"))     
+@iqthon.on(admin_cmd(pattern=f"{alive}(?: |$)(.*)"))     
 async def iq(iqthonevent):
     reply_to_id = await reply_id(iqthonevent)
     uptime = await get_readable_time((time.time() - StartTime))
