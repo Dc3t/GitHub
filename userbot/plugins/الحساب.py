@@ -84,7 +84,7 @@ plagiarism = gvarstatus("OR_PLAG") or "انتحال"
 unplagiarism = gvarstatus("OR_UNPLAG") or "الغاء الانتحال"
 idee = gvarstatus("OR_ID") or "ايدي"
 nameauto = gvarstatus("OR_NAMEAUTO") or "اسم وقتي"
-autobbio = gvarstatus("OR_AUTOBIO") or "نبذه وقتيه"
+autobio = gvarstatus("OR_AUTOBIO") or "نبذه وقتيه"
 
 
 
