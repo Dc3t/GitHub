@@ -12,6 +12,7 @@ from ..helpers.utils import _catutils
 from ..sql_helper.globals import addgvar, gvarstatus
 from . import BOTLOG, BOTLOG_CHATID
 plugin_category = "extra"
+MUQT = gvarstatus("OR_MUQT") or "مؤقت"
 
 
 async def spam_function(event, sandy, cat, sleeptimem, sleeptimet, DelaySpam=False):
@@ -155,7 +156,7 @@ async def tmeme(event):
             await event.client.send_message(                BOTLOG_CHATID,                "#WSPAM\n"                + f"Word Spam was executed successfully in {get_display_name(await event.get_chat())}(`{event.chat_id}`) chat with : `{message}`",            )
 
 
-@iqthon.iq_cmd(    pattern="(ارسال_وقتي|مؤقت) ([\s\S]*)",)
+@iqthon.iq_cmd(pattern=f"{MUQT} ([\s\S]*)",)
 async def spammer(event):
     reply = await event.get_reply_message()
     input_str = "".join(event.text.split(maxsplit=1)[1:]).split(" ", 2)
