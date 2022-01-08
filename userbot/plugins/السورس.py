@@ -46,6 +46,9 @@ from ..sql_helper.globals import addgvar, delgvar, gvarstatus
 from ..sql_helper.global_collection import add_to_collectionlist, del_keyword_collectionlist, get_collectionlist_items
 from . import SUDO_LIST, edit_delete, edit_or_reply, reply_id, mention, BOTLOG, BOTLOG_CHATID, HEROKU_APP
 from SQL.extras import *
+ALIVE = gvarstatus("OR_ALIVE") or "(فحص|السورس)"
+UPDATE = gvarstatus("OR_UPDATE") or "(اعاده تشغيل|تحديث)"
+ORDERS = gvarstatus("OR_ORDERS") or "(اوامري|أوامري)"
 IQTHONPC = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/7fe6990ff2291b21af220.mp4"
 LOGS = logging.getLogger(os.path.basename(__name__))
 LOGS1 = logging.getLogger(__name__)
@@ -73,7 +76,7 @@ def convert_from_bytes(size):
         size /= power
         n += 1
     return f"{round(size, 2)} {units[n]}"
-@iqthon.on(admin_cmd(pattern="(فحص|السورس)(?: |$)(.*)"))     
+@iqthon.on(admin_cmd(pattern=f"{ALIVE}(?: |$)(.*)"))     
 async def iq(iqthonevent):
     reply_to_id = await reply_id(iqthonevent)
     uptime = await get_readable_time((time.time() - StartTime))
@@ -231,7 +234,7 @@ if Config.PLUGIN_CHANNEL:
                 await iqthon.send_message(                    BOTLOG_CHATID,                    f"**⎈ ⦙   تحـميل المـلف 🗂️  : `{os.path.basename(downloaded_file_name)}`  تـم بنجـاح ✔️**",                )
 
     iqthon.loop.create_task(install())
-@iqthon.on(admin_cmd(pattern="تحديث(?: |$)(.*)"))    
+@iqthon.on(admin_cmd(pattern=f"{UPDATE}(?: |$)(.*)"))    
 async def _(event):
     if BOTLOG:
         await event.client.send_message(BOTLOG_CHATID, "**⎈ ⦙   تم تحديث سورس تليثون ↻**")
@@ -631,7 +634,7 @@ async def inlineiqthon(iqthon):
     text = "**🚹  ⦑   اوامر الصيغ   ⦒  :**"
     buttons = [[Button.inline("اوامر الصيغ  1", data="shag1"),],[Button.inline("اوامر الصيغ 2", data="shag2"),],[Button.inline("رجوع", data="orders"),]]
     await iqthon.edit(text, buttons=buttons)
-@iqthon.on(admin_cmd(pattern="(اوامري|أوامري)(?: |$)(.*)"))    
+@iqthon.on(admin_cmd(pattern=f"{ORDERS}(?: |$)(.*)"))    
 async def iq(event):
     await edit_or_reply(event, "**• 🚹  ⦑   اوامر  تـليـثـون الـعـرب ⦒ : ** \n\n                                                       𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻\n( `.م1`)  ⦙  اوامر الحساب 1\n( `.م2` )  ⦙  اوامر الحساب 2\n( `.م3` )  ⦙  اوامر الحساب 3\n( `.م4` )  ⦙  اوامر الحساب 4\n( `.م24` )  ⦙  اوامر الحساب 5\n                                                       𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻\n( `.م5` )  ⦙  اوامر السورس\n( `.م6` )  ⦙  اوامر الوقتي\n( `.م7` ) ⦙ اوامر التسليه المتحركه\n( `.م8` ) ⦙ اوامر الفارات\n                                                      𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻\n( `.م9` )  ⦙  اوامر الالعاب 1\n( `.م10` )  ⦙  اوامر الالعاب 2\n( `.م11`)   ⦙  اوامر الالعاب 3\n( `.م28`)   ⦙  اوامر الالعاب 4\n( `.م29`)   ⦙  اوامر الالعاب 5\n                                                      𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻\n( `.م12` )  ⦙  اوامر الصيغ 1\n( `.م13` )  ⦙  اوامر الصيغ 2\n                                                       𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻\n( `.م14` )  ⦙  اوامر الاعلانات ونشر المؤقت\n( `.م15` )  ⦙  اوامر التنزيلات والاغاني\n                                                       𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻\n( `.م16` )  ⦙  اوامر الكروب 1\n( `.م17` )  ⦙  اوامر الكروب 2\n( `.م18` )  ⦙  اوامر الكروب 3\n( `.م19` )  ⦙  اوامر الكروب 4\n( `.م20` )  ⦙  اوامر الكروب 5\n( `.م25` )  ⦙  اوامر الكروب 6\n                                                       𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻\n( `.م21` )  ⦙  اوامر بصمات ميمز 1\n( `.م22` )  ⦙  اوامر بصمات ميمز 2\n( `.م23` )  ⦙  اوامر بصمات ميمز 3\n                                                       𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻\n( `.م26` )  ⦙  لأوامر الزخرفة \n( `.م27` )  ⦙  لأوامر التكرار \n                                                       𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻\n-  ＳＯＵＲСＥ - @IQTHON 𝆹𝅥𝅮")
 @iqthon.on(admin_cmd(pattern="م9(?: |$)(.*)"))    
