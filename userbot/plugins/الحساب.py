@@ -897,7 +897,7 @@ async def _(event):
     if BOTLOG:
         await event.client.send_message(            BOTLOG_CHATID,            f"**⎈ ⦙  الإنتحـال 🃏 :** \n **✓ تـم إنتحـال الحسـاب بنجـاح :**  [{first_name}](tg://user?id={user_id })"        )
 async def autobio_loop():
-    AUTOBIOSTART = gvarstatus("نبذه وقتيه") == "true"
+    AUTOBIOSTART = gvarstatus(f"{OR_AUTOBIO}") == "true"
     while AUTOBIOSTART:
         HM = time.strftime("%I:%M")
         Dont1Tags = gvarstatus("FONTS_AUTO") or "font1"
@@ -910,7 +910,7 @@ async def autobio_loop():
             LOGS.warning(str(ex))
             await asyncio.sleep(ex.seconds)
         await asyncio.sleep(Config.CHANGE_TIME)
-        AUTOBIOSTART = gvarstatus("نبذه وقتيه") == "true"
+        AUTOBIOSTART = gvarstatus(f"{OR_AUTOBIO}") == "true"
 @iqthon.on(admin_cmd(pattern=f"{unplagiarism}(?: |$)(.*)"))
 async def _(event):
     name = f"{DEFAULTUSER}"
@@ -960,10 +960,10 @@ async def fetch_info(replied_user, event):
     caption += "<b>𓍹ⵧⵧⵧⵧⵧⵧⵧⵧ⁦⁦ⵧⵧⵧⵧⵧⵧⵧⵧ𓍻</b>\n"
     return photo, caption
 async def autoname_loop():
-    AUTONAMESTART = gvarstatus("اسم وقتي") == "true"
+    AUTONAMESTART = gvarstatus(f"{OR_NAMEAUTO}") == "true"
     while AUTONAMESTART:
         HM = time.strftime("%I:%M")
-        Dont1Tags = gvarstatus("FONTS_AUTO") or "font1"
+        Dont1Tags = gvarstatus(f"{OR_NAMEAUTO}") or "font1"
         FONT1 = requests.get(f"https://klanrsulten.ml/FONTS/{Dont1Tags}.php?text={HM}").json()['newText']
         name = f"{EMOJI_TELETHON} {FONT1} | "
         LOGS.info(name)
@@ -973,7 +973,7 @@ async def autoname_loop():
             LOGS.warning(str(ex))
             await asyncio.sleep(ex.seconds)
         await asyncio.sleep(Config.CHANGE_TIME)
-        AUTONAMESTART = gvarstatus("اسم وقتي") == "true"
+        AUTONAMESTART = gvarstatus(f"{OR_NAMEAUTO}") == "true"
 @iqthon.on(admin_cmd(pattern="كشف(?:\s|$)([\s\S]*)"))
 async def _(event):
     replied_user, error_i_a = await get_user_from_event(event)
@@ -1120,15 +1120,15 @@ async def potocmd(event):
         send_photos = await event.client.download_media(photos[uid - 1])
         await event.client.send_file(event.chat_id, send_photos)
     await event.delete()  
-@iqthon.on(admin_cmd(pattern=f"{fotoauto}(?: |$)(.*)"))
+@iqthon.on(admin_cmd(pattern=f"{OR_FOTOAUTO}(?: |$)(.*)"))
 async def _(event):
     downloader = SmartDL(digitalpfp, digitalpic_path, progress_bar=False)
     downloader.start(blocking=False)
     while not downloader.isFinished():
         pass
-    if gvarstatus("صوره وقتيه") is not None and gvarstatus("صوره وقتيه") == "true":
+    if gvarstatus(f"{OR_FOTOAUTO}") is not None and gvarstatus(f"{OR_FOTOAUTO}") == "true":
         return await edit_delete(event, f"**⎈ ⦙  صوره وقتيه مفعّلـة بالفعـل !**")
-    addgvar("صوره وقتيه", True)
+    addgvar(f"{OR_FOTOAUTO}", True)
     await edit_delete(event, f"**⎈ ⦙  تـمّ بـدأ الصـورة الديجيتـال بواسطـة المستخـدم ✓**")
     await digitalpicloop()
 @iqthon.on(admin_cmd(pattern="الملفات ?(.*)"))
@@ -1309,14 +1309,14 @@ async def pmto(event):
         await event.edit("تم الارسال !🤗")
     except BaseException:
         await event.edit("هناك خطا .")
-@iqthon.on(admin_cmd(pattern=f"{nameauto}(?: |$)(.*)"))
+@iqthon.on(admin_cmd(pattern=f"{OR_NAMEAUTO}(?: |$)(.*)"))
 async def _(event):
     if gvarstatus(f"{nameauto}") is not None and gvarstatus(f"{nameauto}") == "true":
         return await edit_delete(event, f"**⎈ ⦙  الإسـم الوقتـي قيـد التشغيـل بالفعـل !**")
     addgvar(f"{nameauto}", True)
     await edit_delete(event, "**⎈ ⦙  تـمّ بـدأ الإسـم الوقتـي بواسطـة المستخـدم ✓**")
     await autoname_loop()
-@iqthon.on(admin_cmd(pattern=f"{autobio}(?: |$)(.*)"))
+@iqthon.on(admin_cmd(pattern=f"{OR_AUTOBIO}(?: |$)(.*)"))
 async def _(event):
     "⎈ ⦙  يحـدّث البايـو مع الوقـت 💡"
     if gvarstatus(f"{autobio}") is not None and gvarstatus(f"{autobio}") == "true":
@@ -1734,7 +1734,7 @@ async def _(event):  # sourcery no-metrics
             await event.client(                functions.account.UpdateProfileRequest(about=DEFAULTUSERBIO)            )
             return await edit_delete(event, "**⎈ ⦙  تم إيقـاف البايـو التلقائـي الآن ✓**")
         return await edit_delete(event, "**⎈ ⦙  لم يتـم تفعيـل البايـو التلقائـي ✕**")
-    END_CMDS = ["تجديد الصوره","اسم وقتي","بايو وقتي",]
+    END_CMDS = [f"{OR_FOTOAUTO}", f"{OR_NAMEAUTO}", f"{OR_AUTOBIO}",]
     if input_str not in END_CMDS:
         await edit_delete(            event,            f"⎈ ⦙   {input_str} أمـر الإنهـاء غيـر صالـح، اذڪـر بوضـوح ما يجـب أن أنهـي !",            parse_mode=_format.parse_pre        )
 iqthon.loop.create_task(digitalpicloop())
