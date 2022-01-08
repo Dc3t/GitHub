@@ -7,7 +7,7 @@ from asyncio import sleep
 from ..helpers.functions import deEmojify, hide_inlinebot, waifutxt
 
 
-@iqthon.on(man_cmd(outgoing=True, pattern=r"rst(?: |$)(.*)"))
+@iqthon.on(outgoing=True, pattern=r"rst(?: |$)(.*)"))
 async def rastick(animu):
     text = animu.pattern_match.group(1)
     if not text:
