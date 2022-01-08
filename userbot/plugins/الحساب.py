@@ -1311,17 +1311,17 @@ async def pmto(event):
         await event.edit("هناك خطا .")
 @iqthon.on(admin_cmd(pattern=f"{OR_NAMEAUTO}(?: |$)(.*)"))
 async def _(event):
-    if gvarstatus(f"{nameauto}") is not None and gvarstatus(f"{nameauto}") == "true":
+    if gvarstatus(f"{OR_NAMEAUTO}") is not None and gvarstatus(f"{OR_NAMEAUTO}") == "true":
         return await edit_delete(event, f"**⎈ ⦙  الإسـم الوقتـي قيـد التشغيـل بالفعـل !**")
-    addgvar(f"{nameauto}", True)
+    addgvar(f"{OR_NAMEAUTO}", True)
     await edit_delete(event, "**⎈ ⦙  تـمّ بـدأ الإسـم الوقتـي بواسطـة المستخـدم ✓**")
     await autoname_loop()
 @iqthon.on(admin_cmd(pattern=f"{OR_AUTOBIO}(?: |$)(.*)"))
 async def _(event):
     "⎈ ⦙  يحـدّث البايـو مع الوقـت 💡"
-    if gvarstatus(f"{autobio}") is not None and gvarstatus(f"{autobio}") == "true":
+    if gvarstatus(f"{OR_AUTOBIO}") is not None and gvarstatus(f"{OR_AUTOBIO}") == "true":
         return await edit_delete(event, f"**⎈ ⦙  البايـو الوقتـي قيـد التشغيـل بالفعـل !**")
-    addgvar(f"{autobio}", True)
+    addgvar(f"{OR_AUTOBIO}", True)
     await edit_delete(event, "**⎈ ⦙  تـمّ بـدأ البايـو الوقتـي بواسطـة المستخـدم ✓**")
     await autobio_loop()
 @iqthon.on(admin_cmd(outgoing=True, pattern="ص51$"))
