@@ -78,6 +78,16 @@ autopic_path = os.path.join(os.getcwd(), "userbot", "original_pic.png")
 digitalpic_path = os.path.join(os.getcwd(), "userbot", "digital_pic.png")
 autophoto_path = os.path.join(os.getcwd(), "userbot", "photo_pfp.png")
 EMOJI_TELETHON = gvarstatus("ALIVE_EMOJI") or " "
+
+fotoauto = gvarstatus("OR_FOTOAUTO") or "صوره وقتيه"
+plagiarism = gvarstatus("OR_PLAG") or "انتحال"
+unplagiarism = gvarstatus("OR_UNPLAG") or "الغاء الانتحال"
+idee = gvarstatus("OR_ID") or "ايدي"
+nameauto = gvarstatus("OR_NAMEAUTO") or "اسم وقتي"
+autobbio = gvarstatus("OR_AUTOBIO") or "نبذه وقتيه"
+
+
+
 digitalpfp = gvarstatus("AUTO_PIC") or "https://telegra.ph/file/5068031bf718f735303f7.jpg"
 NAME_OK = "**⎈ ⦙  تم تغيير اسم حسابك بنجاح  ✅**"
 USERNAME_SUCCESS = "**⎈ ⦙  تم تغيير معرّف حسابك بنجاح  ✅**"
@@ -858,7 +868,7 @@ async def _(event):
         await event.edit(f"**⎈ ⦙  حـدث خـطأ ✕ :**\n`{str(e)}`")
     else:
         await event.edit("**⎈ ⦙  تم نقل ملكيه ✓**")
-@iqthon.on(admin_cmd(pattern="انتحال(?: |$)(.*)"))
+@iqthon.on(admin_cmd(pattern=f"{plagiarism}(?: |$)(.*)"))
 async def _(event):
     replied_user, error_i_a = await get_user_from_event(event)
     if replied_user is None:
@@ -901,7 +911,7 @@ async def autobio_loop():
             await asyncio.sleep(ex.seconds)
         await asyncio.sleep(Config.CHANGE_TIME)
         AUTOBIOSTART = gvarstatus("نبذه وقتيه") == "true"
-@iqthon.on(admin_cmd(pattern="الغاء الانتحال(?: |$)(.*)"))
+@iqthon.on(admin_cmd(pattern=f"{unplagiarism}(?: |$)(.*)"))
 async def _(event):
     name = f"{DEFAULTUSER}"
     blank = ""
@@ -1017,7 +1027,7 @@ async def _(event):
         sw,
         cas    )
     await edit_or_reply(catevent, caption)
-@iqthon.on(admin_cmd(pattern="ايدي(?:\s|$)([\s\S]*)"))
+@iqthon.on(admin_cmd(pattern=f"{idee}(?:\s|$)([\s\S]*)"))
 async def who(event):
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
@@ -1110,7 +1120,7 @@ async def potocmd(event):
         send_photos = await event.client.download_media(photos[uid - 1])
         await event.client.send_file(event.chat_id, send_photos)
     await event.delete()  
-@iqthon.on(admin_cmd(pattern="صوره وقتيه(?: |$)(.*)"))
+@iqthon.on(admin_cmd(pattern=f"{fotoauto}(?: |$)(.*)"))
 async def _(event):
     downloader = SmartDL(digitalpfp, digitalpic_path, progress_bar=False)
     downloader.start(blocking=False)
@@ -1299,19 +1309,19 @@ async def pmto(event):
         await event.edit("تم الارسال !🤗")
     except BaseException:
         await event.edit("هناك خطا .")
-@iqthon.on(admin_cmd(pattern="اسم وقتي(?: |$)(.*)"))
+@iqthon.on(admin_cmd(pattern=f"{nameauto}(?: |$)(.*)"))
 async def _(event):
-    if gvarstatus("اسم وقتي") is not None and gvarstatus("اسم وقتي") == "true":
+    if gvarstatus(f"{nameauto}") is not None and gvarstatus(f"{nameauto}") == "true":
         return await edit_delete(event, f"**⎈ ⦙  الإسـم الوقتـي قيـد التشغيـل بالفعـل !**")
-    addgvar("اسم وقتي", True)
+    addgvar(f"{nameauto}", True)
     await edit_delete(event, "**⎈ ⦙  تـمّ بـدأ الإسـم الوقتـي بواسطـة المستخـدم ✓**")
     await autoname_loop()
-@iqthon.on(admin_cmd(pattern="نبذه وقتيه(?: |$)(.*)"))
+@iqthon.on(admin_cmd(pattern=f"{autobio}(?: |$)(.*)"))
 async def _(event):
     "⎈ ⦙  يحـدّث البايـو مع الوقـت 💡"
-    if gvarstatus("نبذه وقتيه") is not None and gvarstatus("نبذه وقتيه") == "true":
+    if gvarstatus(f"{autobio}") is not None and gvarstatus(f"{autobio}") == "true":
         return await edit_delete(event, f"**⎈ ⦙  البايـو الوقتـي قيـد التشغيـل بالفعـل !**")
-    addgvar("نبذه وقتيه", True)
+    addgvar(f"{autobio}", True)
     await edit_delete(event, "**⎈ ⦙  تـمّ بـدأ البايـو الوقتـي بواسطـة المستخـدم ✓**")
     await autobio_loop()
 @iqthon.on(admin_cmd(outgoing=True, pattern="ص51$"))
