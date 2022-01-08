@@ -4,7 +4,7 @@ from PIL import Image
 from userbot import iqthon
 import random
 from asyncio import sleep
-from userbot.utils import deEmojify
+from ..helpers.functions import deEmojify, hide_inlinebot, waifutxt
 
 
 @iqthon.on(man_cmd(outgoing=True, pattern=r"rst(?: |$)(.*)"))
