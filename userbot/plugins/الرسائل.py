@@ -58,6 +58,10 @@ CHAT_FLOOD = sql.__load_flood_settings()
 ANTI_FLOOD_WARN_MODE = ChatBannedRights(
 until_date=None, view_messages=None, send_messages=True)
 BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\<buttonurl:(?:/{0,2})(.+?)(:same)?\>)")
+ALLGROUB = gvarstatus("OR_ALLGROUB") or "للكروب"
+ALLPRIVATE = gvarstatus("OR_ALLPRIVATE") or "للكروب"
+FOTOSECRET = gvarstatus("OR_FOTOSECRET") or "جلب الوقتيه"
+
 
 def build_keyboard(buttons):
     keyb = []
@@ -99,7 +103,7 @@ async def _(event):
     if m.media and not isinstance(m.media, MessageMediaWebPage):
         return await event.client.send_file(event.chat_id, m.media, caption=m.text)
     await event.client.send_message(event.chat_id, m.text)
-@iqthon.on(admin_cmd(pattern="للكروب ?(.*)$"))    
+@iqthon.on(admin_cmd(pattern=f"{ALLGROUB} ?(.*)$"))    
 async def gcast(event):
     if not event.out and not is_fullsudo(event.sender_id):
         return await edit_or_reply(event, "هـذا الامـر مقـيد ")
@@ -150,7 +154,7 @@ async def _(event):
         await no_admin_privilege_message.edit("**⎈ ⦙   هذا الشخص الذي قام بتكرار الرسائل والازعاج **")
     else:
         await event.client.send_message(entity=event.chat_id, message=f"""**⎈ ⦙   تحذير تكرار فـي المجموعة : لـ** [User](tg://user?id={event.message.sender_id}) تم تقيد الشخص بسبب عمل تكرار للرسائل والازعاج.""", reply_to=event.message.id)
-@iqthon.on(admin_cmd(pattern="للخاص ?(.*)$"))    
+@iqthon.on(admin_cmd(pattern=f"{ALLPRIVATE} ?(.*)$"))    
 async def gucast(event):
     if not event.out and not is_fullsudo(event.sender_id):
         return await edit_or_reply(event, "هـذا الامـر مقـيد ")
@@ -908,7 +912,7 @@ async def _(event):
         await edit_or_reply(event, output_str)
     except Exception as exc:
         await edit_delete(event, f"**خـطأ:**\n`{str(exc)}`", time=5)
-@iqthon.on(admin_cmd(pattern="جلب الوقتيه(?: |$)(.*)"))    
+@iqthon.on(admin_cmd(pattern=f"{FOTOSECRET}(?: |$)(.*)"))    
 async def iq(event):
   if not event.is_reply:
     return await event.edit('**يجـب عـليك الـرد عـلى صـورة ذاتيـة الـتدمير**')
