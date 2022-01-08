@@ -1715,22 +1715,22 @@ async def autopic(event):
 @iqthon.on(admin_cmd(pattern="ايقاف ([\s\S]*)"))
 async def _(event):  # sourcery no-metrics
     input_str = event.pattern_match.group(1)
-    if input_str == "صوره وقتيه":
-        if gvarstatus("صوره وقتيه") is not None and gvarstatus("صوره وقتيه") == "true":
-            delgvar("صوره وقتيه")
+    if input_str == f"{OR_FOTOAUTO}":
+        if gvarstatus(f"{OR_FOTOAUTO}") is not None and gvarstatus(f"{OR_FOTOAUTO}") == "true":
+            delgvar(f"{OR_FOTOAUTO}")
             await event.client(
                 functions.photos.DeletePhotosRequest(                    await event.client.get_profile_photos("me", limit=1)                )            )
             return await edit_delete(event, "**⎈ ⦙  تم إيقـاف  صوره وقتيه الآن ✓**")
         return await edit_delete(event, "**⎈ ⦙  لم يتـم تفعيـل صوره وقتيه ✕**")
-    if input_str == "اسم وقتي":
-        if gvarstatus("اسم وقتي") is not None and gvarstatus("اسم وقتي") == "true":
-            delgvar("اسم وقتي")
+    if input_str == f"{OR_NAMEAUTO}":
+        if gvarstatus(f"{OR_NAMEAUTO}") is not None and gvarstatus(f"{OR_NAMEAUTO}") == "true":
+            delgvar(f"{OR_NAMEAUTO}")
             await event.client(                functions.account.UpdateProfileRequest(first_name=DEFAULTUSER)            )
             return await edit_delete(event, "**⎈ ⦙  تم إيقـاف الإسـم الوقتـي الآن ✓**")
         return await edit_delete(event, "**⎈ ⦙  لم يتـم تفعيـل الإسـم الوقتـي ✕**")
-    if input_str == "نبذه وقتيه":
-        if gvarstatus("نبذه وقتيه") is not None and gvarstatus("نبذه وقتيه") == "true":
-            delgvar("نبذه وقتيه")
+    if input_str == f"{OR_AUTOBIO}":
+        if gvarstatus(f"{OR_AUTOBIO}") is not None and gvarstatus(f"{OR_AUTOBIO}") == "true":
+            delgvar(f"{OR_AUTOBIO}")
             await event.client(                functions.account.UpdateProfileRequest(about=DEFAULTUSERBIO)            )
             return await edit_delete(event, "**⎈ ⦙  تم إيقـاف البايـو التلقائـي الآن ✓**")
         return await edit_delete(event, "**⎈ ⦙  لم يتـم تفعيـل البايـو التلقائـي ✕**")
