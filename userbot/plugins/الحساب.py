@@ -79,12 +79,12 @@ digitalpic_path = os.path.join(os.getcwd(), "userbot", "digital_pic.png")
 autophoto_path = os.path.join(os.getcwd(), "userbot", "photo_pfp.png")
 EMOJI_TELETHON = gvarstatus("ALIVE_EMOJI") or " "
 
-fotoauto = gvarstatus("OR_FOTOAUTO") or "صوره وقتيه"
+OR_FOTOAUTO = gvarstatus("OR_FOTOAUTO") or "صوره وقتيه"
 plagiarism = gvarstatus("OR_PLAG") or "انتحال"
 unplagiarism = gvarstatus("OR_UNPLAG") or "الغاء الانتحال"
 idee = gvarstatus("OR_ID") or "ايدي"
-nameauto = gvarstatus("OR_NAMEAUTO") or "اسم وقتي"
-autobio = gvarstatus("OR_AUTOBIO") or "نبذه وقتيه"
+OR_NAMEAUTO = gvarstatus("OR_NAMEAUTO") or "اسم وقتي"
+OR_AUTOBIO = gvarstatus("OR_AUTOBIO") or "نبذه وقتيه"
 
 
 
