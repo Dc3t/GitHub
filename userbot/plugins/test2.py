@@ -43,8 +43,8 @@ async def crop(imagefile, endname, x):
     inverted_image.save(endname)
 
 
-@iqthon.on(admin_cmd(pattern="invert$", outgoing=True))
-@iqthon.on(sudo_cmd(pattern="invert$", allow_sudo=True))
+@iqthon.on(admin_cmd(pattern="عكس الالوان$", outgoing=True))
+@iqthon.on(sudo_cmd(pattern="عكس الالوان$", allow_sudo=True))
 async def memes(mafia):
     if mafia.fwd_from:
         return
@@ -127,8 +127,8 @@ async def memes(mafia):
             os.remove(files)
 
 
-@iqthon.on(admin_cmd(outgoing=True, pattern="solarize$"))
-@iqthon.on(sudo_cmd(pattern="solarize$", allow_sudo=True))
+@iqthon.on(admin_cmd(outgoing=True, pattern="فلتر احمر$"))
+@iqthon.on(sudo_cmd(pattern="فلتر احمر$", allow_sudo=True))
 async def memes(mafia):
     if mafia.fwd_from:
         return
@@ -211,8 +211,8 @@ async def memes(mafia):
             os.remove(files)
 
 
-@iqthon.on(admin_cmd(outgoing=True, pattern="mirror$"))
-@iqthon.on(sudo_cmd(pattern="mirror$", allow_sudo=True))
+@iqthon.on(admin_cmd(outgoing=True, pattern="يمين الصوره$"))
+@iqthon.on(sudo_cmd(pattern="يمين الصوره$", allow_sudo=True))
 async def memes(mafia):
     if mafia.fwd_from:
         return
@@ -295,8 +295,8 @@ async def memes(mafia):
             os.remove(files)
 
 
-@iqthon.on(admin_cmd(outgoing=True, pattern="flip$"))
-@iqthon.on(sudo_cmd(pattern="flip$", allow_sudo=True))
+@iqthon.on(admin_cmd(outgoing=True, pattern="قلب الصوره$"))
+@iqthon.on(sudo_cmd(pattern="قلب الصوره$", allow_sudo=True))
 async def memes(mafia):
     if mafia.fwd_from:
         return
@@ -379,7 +379,7 @@ async def memes(mafia):
             os.remove(files)
 
 
-@iqthon.on(admin_cmd(outgoing=True, pattern="gray$"))
+@iqthon.on(admin_cmd(outgoing=True, pattern="فلتر رصاصي$"))
 @iqthon.on(sudo_cmd(pattern="gray$", allow_sudo=True))
 async def memes(mafia):
     if mafia.fwd_from:
@@ -463,8 +463,8 @@ async def memes(mafia):
             os.remove(files)
 
 
-@iqthon.on(admin_cmd(outgoing=True, pattern="zoom ?(.*)"))
-@iqthon.on(sudo_cmd(pattern="zoom ?(.*)", allow_sudo=True))
+@iqthon.on(admin_cmd(outgoing=True, pattern="زوم ?(.*)"))
+@iqthon.on(sudo_cmd(pattern="زوم ?(.*)", allow_sudo=True))
 async def memes(mafia):
     if mafia.fwd_from:
         return
@@ -554,8 +554,8 @@ async def memes(mafia):
             os.remove(files)
 
 
-@iqthon.on(admin_cmd(outgoing=True, pattern="frame ?(.*)"))
-@iqthon.on(sudo_cmd(pattern="frame ?(.*)", allow_sudo=True))
+@iqthon.on(admin_cmd(outgoing=True, pattern="اطار ?(.*)"))
+@iqthon.on(sudo_cmd(pattern="اطار ?(.*)", allow_sudo=True))
 async def memes(mafia):
     if mafia.fwd_from:
         return
