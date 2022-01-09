@@ -299,10 +299,10 @@ async def _(event):
         await event.edit("`Give a name too!`")
     else:
         await event.edit("`Processing`")
-    chat = "@KazukoRobot"
+    chat = "@GenLogoBot"
     async with event.client.conversation(chat) as conv:
         try:
-            msg = await conv.send_message(f"/logo {text}")
+            msg = await conv.send_message(f"{text}")
             response = await conv.get_response()
             logo = await conv.get_response()
             """ - don't spam notif - """
@@ -316,7 +316,7 @@ async def _(event):
         await event.client.send_file(
             event.chat_id,
             logo,
-            caption=f"Logo by [{ALIVE_NAME}](tg://user?id={aing.id})",
+            caption=f" لوقو ل : [{ALIVE_NAME}](tg://user?id={aing.id})",
         )
         await event.client.delete_messages(conv.chat_id, [msg.id, response.id, logo.id])
         await event.delete()
@@ -626,9 +626,7 @@ async def memes(mafia):
         meme_file = mafiafile
         kraken = True
     elif mafiasticker.endswith((".mp4", ".mov")):
-        await mafia.edit(
-            "Analyzing this media 🧐 framing this video!"
-        )
+        await mafia.edit(            "Analyzing this media 🧐 framing this video!"        )
         mafiafile = os.path.join("./temp/", "memes.jpg")
         await take_screen_shot(mafiasticker, 0, mafiafile)
         if not os.path.lexists(mafiafile):
@@ -636,9 +634,7 @@ async def memes(mafia):
             return
         meme_file = mafiafile
     else:
-        await mafia.edit(
-            "Analyzing this media 🧐 framing this image!"
-        )
+        await mafia.edit(            "Analyzing this media 🧐 framing this image!"        )
         meme_file = mafiasticker
     try:
         san = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
@@ -653,9 +649,7 @@ async def memes(mafia):
     except Exception as e:
         return await mafia.edit(f"`{e}`")
     try:
-        await mafia.client.send_file(
-            mafia.chat_id, outputfile, force_document=False, reply_to=mafiaid
-        )
+        await mafia.client.send_file(            mafia.chat_id, outputfile, force_document=False, reply_to=mafiaid        )
     except Exception as e:
         return await mafia.edit(f"`{e}`")
     await mafia.delete()
@@ -664,57 +658,4 @@ async def memes(mafia):
         if files and os.path.exists(files):
             os.remove(files)
 
-@iqthon.on(admin_cmd(pattern="sin ?(.*)"))
-async def findsin(event):
-    input_str = int(event.pattern_match.group(1))
-    output = math.sin(input_str)
-    await event.edit(f"**Value of Sin** `{input_str}`\n== `{output}`")
 
-
-@iqthon.on(admin_cmd(pattern="cos ?(.*)"))
-async def find_cos(event):
-    input_str = int(event.pattern_match.group(1))
-    output = math.cos(input_str)
-    await event.edit(f"**Value of Cos** `{input_str}`\n== `{output}`")
-
-
-@iqthon.on(admin_cmd(pattern="tan ?(.*)"))
-async def find_tan(event):
-    input_str = int(event.pattern_match.group(1))
-    output = math.tan(input_str)
-    await event.edit(f"**Value of Tan** `{input_str}`\n== `{output}`")
-
-
-@iqthon.on(admin_cmd(pattern="cosec ?(.*)"))
-async def find_csc(event):
-    input_str = float(event.pattern_match.group(1))
-    output = mpmath.csc(input_str)
-    await event.edit(f"**Value of Cosec** `{input_str}`\n== `{output}`")
-
-
-@iqthon.on(admin_cmd(pattern="sec ?(.*)"))
-async def find_sec(event):
-    input_str = float(event.pattern_match.group(1))
-    output = mpmath.sec(input_str)
-    await event.edit(f"**Value of Sec** `{input_str}`\n== `{output}`")
-
-
-@iqthon.on(admin_cmd(pattern="cot ?(.*)"))
-async def find_cot(event):
-    input_str = float(event.pattern_match.group(1))
-    output = mpmath.cot(input_str)
-    await event.edit(f"**Value of Cot** `{input_str}`\n== `{output}`")
-
-
-@iqthon.on(admin_cmd(pattern="square ?(.*)"))
-async def square(event):
-    input_str = float(event.pattern_match.group(1))
-    output = input_str * input_str
-    await event.edit(f"**Square of** `{input_str}`\n== `{output}`")
-
-
-@iqthon.on(admin_cmd(pattern="cube ?(.*)"))
-async def cube(event):
-    input_str = float(event.pattern_match.group(1))  # DANGEROUSJATT
-    output = input_str * input_str * input_str
-    await event.edit(f"**Cube of** `{input_str}`\n== `{output}`")
