@@ -653,7 +653,7 @@ async def memes(mafia):
         if files and os.path.exists(files):
             os.remove(files)
 
-@iqthon.on(outgoing=True, pattern=r"^\.asupan$")
+@iqthon.on(admin_cmd(outgoing=True, pattern=r"^\.asupan$"))
 async def _(event):
     try:
         response = requests.get("https://api-tede.herokuapp.com/api/asupan/ptl").json()
@@ -663,7 +663,7 @@ async def _(event):
         await event.edit("**Tidak bisa menemukan video asupan.**")
 
 
-@iqthon.on(outgoing=True, pattern=r"^\.wibu$")
+@iqthon.on(admin_cmd(outgoing=True, pattern=r"^\.wibu$"))
 async def _(event):
     try:
         response = requests.get("https://api-tede.herokuapp.com/api/asupan/wibu").json()
@@ -673,7 +673,7 @@ async def _(event):
         await event.edit("**Tidak bisa menemukan video wibu.**")
 
 
-@iqthon.on(outgoing=True, pattern=r"^\.chika$")
+@iqthon.on(admin_cmd(outgoing=True, pattern=r"^\.chika$"))
 async def _(event):
     try:
         response = requests.get("https://api-tede.herokuapp.com/api/chika").json()
@@ -683,7 +683,7 @@ async def _(event):
         await event.edit("**Tidak bisa menemukan video chikakiku.**")
 
 
-@iqthon.on(outgoing=True, pattern=r"^\.bocil$")
+@iqthon.on(admin_cmd(outgoing=True, pattern=r"^\.bocil$"))
 async def _(event):
     try:
         response = requests.get(
