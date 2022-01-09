@@ -52,8 +52,6 @@ async def crop(imagefile, endname, x):
 @iqthon.on(admin_cmd(pattern="عكس الالوان$", outgoing=True))
 @iqthon.on(sudo_cmd(pattern="عكس الالوان$", allow_sudo=True))
 async def memes(mafia):
-    if mafia.fwd_from:
-        return
     reply = await mafia.get_reply_message()
     if not (reply and (reply.media)):
         await edit_or_reply(mafia, "`Reply to supported Media...`")
@@ -136,8 +134,6 @@ async def memes(mafia):
 @iqthon.on(admin_cmd(outgoing=True, pattern="فلتر احمر$"))
 @iqthon.on(sudo_cmd(pattern="فلتر احمر$", allow_sudo=True))
 async def memes(mafia):
-    if mafia.fwd_from:
-        return
     reply = await mafia.get_reply_message()
     if not (reply and (reply.media)):
         await edit_or_reply(mafia, "`Reply to supported Media...`")
@@ -220,8 +216,6 @@ async def memes(mafia):
 @iqthon.on(admin_cmd(outgoing=True, pattern="يمين الصوره$"))
 @iqthon.on(sudo_cmd(pattern="يمين الصوره$", allow_sudo=True))
 async def memes(mafia):
-    if mafia.fwd_from:
-        return
     reply = await mafia.get_reply_message()
     if not (reply and (reply.media)):
         await edit_or_reply(mafia, "`Reply to supported Media...`")
@@ -302,8 +296,6 @@ async def memes(mafia):
 
 @iqthon.on(admin_cmd(outgoing=True, pattern=r"^\.wlogo(?: |$)(.*)")
 async def _(event):
-    if event.fwd_from:
-        return
     aing = await event.client.get_me()
     text = event.pattern_match.group(1)
     if not text:
@@ -334,8 +326,6 @@ async def _(event):
 @iqthon.on(admin_cmd(outgoing=True, pattern="قلب الصوره$"))
 @iqthon.on(sudo_cmd(pattern="قلب الصوره$", allow_sudo=True))
 async def memes(mafia):
-    if mafia.fwd_from:
-        return
     reply = await mafia.get_reply_message()
     if not (reply and (reply.media)):
         await edit_or_reply(mafia, "`Reply to supported Media...`")
@@ -418,8 +408,6 @@ async def memes(mafia):
 @iqthon.on(admin_cmd(outgoing=True, pattern="فلتر رصاصي$"))
 @iqthon.on(sudo_cmd(pattern="gray$", allow_sudo=True))
 async def memes(mafia):
-    if mafia.fwd_from:
-        return
     reply = await mafia.get_reply_message()
     if not (reply and (reply.media)):
         await edit_or_reply(mafia, "`Reply to supported Media...`")
@@ -502,8 +490,6 @@ async def memes(mafia):
 @iqthon.on(admin_cmd(outgoing=True, pattern="زوم ?(.*)"))
 @iqthon.on(sudo_cmd(pattern="زوم ?(.*)", allow_sudo=True))
 async def memes(mafia):
-    if mafia.fwd_from:
-        return
     reply = await mafia.get_reply_message()
     if not (reply and (reply.media)):
         await edit_or_reply(mafia, "`Reply to supported Media...`")
@@ -593,8 +579,6 @@ async def memes(mafia):
 @iqthon.on(admin_cmd(outgoing=True, pattern="اطار ?(.*)"))
 @iqthon.on(sudo_cmd(pattern="اطار ?(.*)", allow_sudo=True))
 async def memes(mafia):
-    if mafia.fwd_from:
-        return
     reply = await mafia.get_reply_message()
     if not (reply and (reply.media)):
         await edit_or_reply(mafia, "`Reply to supported Media...`")
