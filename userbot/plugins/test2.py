@@ -50,7 +50,6 @@ async def crop(imagefile, endname, x):
 
 
 @iqthon.on(admin_cmd(pattern="عكس الالوان$", outgoing=True))
-@iqthon.on(sudo_cmd(pattern="عكس الالوان$", allow_sudo=True))
 async def memes(mafia):
     reply = await mafia.get_reply_message()
     if not (reply and (reply.media)):
@@ -132,7 +131,6 @@ async def memes(mafia):
 
 
 @iqthon.on(admin_cmd(outgoing=True, pattern="فلتر احمر$"))
-@iqthon.on(sudo_cmd(pattern="فلتر احمر$", allow_sudo=True))
 async def memes(mafia):
     reply = await mafia.get_reply_message()
     if not (reply and (reply.media)):
@@ -214,7 +212,6 @@ async def memes(mafia):
 
 
 @iqthon.on(admin_cmd(outgoing=True, pattern="يمين الصوره$"))
-@iqthon.on(sudo_cmd(pattern="يمين الصوره$", allow_sudo=True))
 async def memes(mafia):
     reply = await mafia.get_reply_message()
     if not (reply and (reply.media)):
@@ -324,7 +321,6 @@ async def _(event):
         await event.client.delete_messages(conv.chat_id, [msg.id, response.id, logo.id])
         await event.delete()
 @iqthon.on(admin_cmd(outgoing=True, pattern="قلب الصوره$"))
-@iqthon.on(sudo_cmd(pattern="قلب الصوره$", allow_sudo=True))
 async def memes(mafia):
     reply = await mafia.get_reply_message()
     if not (reply and (reply.media)):
@@ -406,7 +402,6 @@ async def memes(mafia):
 
 
 @iqthon.on(admin_cmd(outgoing=True, pattern="فلتر رصاصي$"))
-@iqthon.on(sudo_cmd(pattern="gray$", allow_sudo=True))
 async def memes(mafia):
     reply = await mafia.get_reply_message()
     if not (reply and (reply.media)):
@@ -488,7 +483,6 @@ async def memes(mafia):
 
 
 @iqthon.on(admin_cmd(outgoing=True, pattern="زوم ?(.*)"))
-@iqthon.on(sudo_cmd(pattern="زوم ?(.*)", allow_sudo=True))
 async def memes(mafia):
     reply = await mafia.get_reply_message()
     if not (reply and (reply.media)):
@@ -577,7 +571,6 @@ async def memes(mafia):
 
 
 @iqthon.on(admin_cmd(outgoing=True, pattern="اطار ?(.*)"))
-@iqthon.on(sudo_cmd(pattern="اطار ?(.*)", allow_sudo=True))
 async def memes(mafia):
     reply = await mafia.get_reply_message()
     if not (reply and (reply.media)):
@@ -672,7 +665,6 @@ async def memes(mafia):
             os.remove(files)
 
 @iqthon.on(admin_cmd(pattern="sin ?(.*)"))
-@iqthon.on(sudo_cmd(pattern="sin ?(.*)", allow_sudo=True))
 async def findsin(event):
     input_str = int(event.pattern_match.group(1))
     output = math.sin(input_str)
@@ -680,7 +672,6 @@ async def findsin(event):
 
 
 @iqthon.on(admin_cmd(pattern="cos ?(.*)"))
-@iqthon.on(sudo_cmd(pattern="cos ?(.*)", allow_sudo=True))
 async def find_cos(event):
     input_str = int(event.pattern_match.group(1))
     output = math.cos(input_str)
@@ -688,7 +679,6 @@ async def find_cos(event):
 
 
 @iqthon.on(admin_cmd(pattern="tan ?(.*)"))
-@iqthon.on(sudo_cmd(pattern="tan ?(.*)", allow_sudo=True))
 async def find_tan(event):
     input_str = int(event.pattern_match.group(1))
     output = math.tan(input_str)
@@ -696,7 +686,6 @@ async def find_tan(event):
 
 
 @iqthon.on(admin_cmd(pattern="cosec ?(.*)"))
-@iqthon.on(sudo_cmd(pattern="cosec ?(.*)", allow_sudo=True))
 async def find_csc(event):
     input_str = float(event.pattern_match.group(1))
     output = mpmath.csc(input_str)
@@ -704,7 +693,6 @@ async def find_csc(event):
 
 
 @iqthon.on(admin_cmd(pattern="sec ?(.*)"))
-@iqthon.on(sudo_cmd(pattern="sec ?(.*)", allow_sudo=True))
 async def find_sec(event):
     input_str = float(event.pattern_match.group(1))
     output = mpmath.sec(input_str)
@@ -720,7 +708,6 @@ async def find_cot(event):
 
 
 @iqthon.on(admin_cmd(pattern="square ?(.*)"))
-@iqthon.on(sudo_cmd(pattern="square ?(.*)", allow_sudo=True))
 async def square(event):
     input_str = float(event.pattern_match.group(1))
     output = input_str * input_str
@@ -728,7 +715,6 @@ async def square(event):
 
 
 @iqthon.on(admin_cmd(pattern="cube ?(.*)"))
-@iqthon.on(sudo_cmd(pattern="cube ?(.*)", allow_sudo=True))
 async def cube(event):
     input_str = float(event.pattern_match.group(1))  # DANGEROUSJATT
     output = input_str * input_str * input_str
