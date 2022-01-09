@@ -294,7 +294,7 @@ async def memes(mafia):
         if files and os.path.exists(files):
             os.remove(files)
 
-@iqthon.on(admin_cmd(outgoing=True, pattern=r"^\.wlogo(?: |$)(.*)")
+@iqthon.on(admin_cmd(outgoing=True, pattern=r"^\.wlogo(?: |$)(.*)"))
 async def _(event):
     aing = await event.client.get_me()
     text = event.pattern_match.group(1)
