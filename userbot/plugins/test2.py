@@ -4,6 +4,8 @@ import random
 import shlex
 import math
 import asyncio
+import requests
+
 from userbot.utils.decorators import register
 from . import ALIVE_NAME, AUTONAME, BOTLOG, BOTLOG_CHATID, DEFAULT_BIO, get_user_from_event
 
@@ -651,4 +653,43 @@ async def memes(mafia):
         if files and os.path.exists(files):
             os.remove(files)
 
+@iqthon.on(outgoing=True, pattern=r"^\.asupan$")
+async def _(event):
+    try:
+        response = requests.get("https://api-tede.herokuapp.com/api/asupan/ptl").json()
+        await event.client.send_file(event.chat_id, response["url"])
+        await event.delete()
+    except Exception:
+        await event.edit("**Tidak bisa menemukan video asupan.**")
 
+
+@iqthon.on(outgoing=True, pattern=r"^\.wibu$")
+async def _(event):
+    try:
+        response = requests.get("https://api-tede.herokuapp.com/api/asupan/wibu").json()
+        await event.client.send_file(event.chat_id, response["url"])
+        await event.delete()
+    except Exception:
+        await event.edit("**Tidak bisa menemukan video wibu.**")
+
+
+@iqthon.on(outgoing=True, pattern=r"^\.chika$")
+async def _(event):
+    try:
+        response = requests.get("https://api-tede.herokuapp.com/api/chika").json()
+        await event.client.send_file(event.chat_id, response["url"])
+        await event.delete()
+    except Exception:
+        await event.edit("**Tidak bisa menemukan video chikakiku.**")
+
+
+@iqthon.on(outgoing=True, pattern=r"^\.bocil$")
+async def _(event):
+    try:
+        response = requests.get(
+            "https://api-alphabot.herokuapp.com/api/asupan/bocil?apikey=Alphabot"
+        ).json()
+        await event.client.send_file(event.chat_id, response["result"])
+        await event.delete()
+    except Exception:
+        await event.edit("**Tidak bisa menemukan video asupan bocil.**")
