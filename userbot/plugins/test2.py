@@ -14,6 +14,7 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 from typing import Optional, Tuple
 from PIL import Image, ImageDraw, ImageFont
 import PIL.ImageOps
+from userbot.utils import admin_cmd, edit_or_reply as eor, sudo_cmd
 
 from userbot.utils import admin_cmd, sudo_cmd, eor
 from userbot import iqthon
