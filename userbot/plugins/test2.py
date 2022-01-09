@@ -291,33 +291,26 @@ async def memes(mafia):
         if files and os.path.exists(files):
             os.remove(files)
 
-@iqthon.on(admin_cmd(outgoing=True, pattern=r"^\.wlogo(?: |$)(.*)"))
+@iqthon.on(admin_cmd(outgoing=True, pattern=r"^\.لوقو(?: |$)(.*)"))
 async def _(event):
     aing = await event.client.get_me()
     text = event.pattern_match.group(1)
     if not text:
-        await event.edit("`Give a name too!`")
+        await event.edit("ضع اسم بجانب الامر لعمل لوقو")
     else:
-        await event.edit("`Processing`")
+        await event.edit("جاري عمل لوقو ")
     chat = "@GenLogoBot"
     async with event.client.conversation(chat) as conv:
         try:
             msg = await conv.send_message(f"{text}")
-            response = await conv.get_response()
-            logo = await conv.get_response()
-            """ - don't spam notif - """
+            response = await conv.get_response(5)
+            logo = await conv.get_response(5)
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await event.edit(
-                "**Error: Mohon Buka Blokir** @KazukoRobot **Dan Coba Lagi Kontol!**"
-            )
+            await event.edit(                "**فك الحظر من :** @GenLogoBot !**"            )
             return
         await asyncio.sleep(0.5)
-        await event.client.send_file(
-            event.chat_id,
-            logo,
-            caption=f" لوقو ل : [{ALIVE_NAME}](tg://user?id={aing.id})",
-        )
+        await event.client.send_file(            event.chat_id,            logo,            caption=f" لوقو ل : [{ALIVE_NAME}](tg://user?id={aing.id})",        )
         await event.client.delete_messages(conv.chat_id, [msg.id, response.id, logo.id])
         await event.delete()
 @iqthon.on(admin_cmd(outgoing=True, pattern="قلب الصوره$"))
