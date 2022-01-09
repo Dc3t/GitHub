@@ -211,8 +211,8 @@ async def memes(mafia):
             os.remove(files)
 
 
-@mafiabot.on(admin_cmd(outgoing=True, pattern="mirror$"))
-@mafiabot.on(sudo_cmd(pattern="mirror$", allow_sudo=True))
+@iqthon.on(admin_cmd(outgoing=True, pattern="mirror$"))
+@iqthon.on(sudo_cmd(pattern="mirror$", allow_sudo=True))
 async def memes(mafia):
     if mafia.fwd_from:
         return
