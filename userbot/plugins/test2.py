@@ -700,7 +700,6 @@ async def find_sec(event):
 
 
 @iqthon.on(admin_cmd(pattern="cot ?(.*)"))
-@iqthon.on(sudo_cmd(pattern="cot ?(.*)", allow_sudo=True))
 async def find_cot(event):
     input_str = float(event.pattern_match.group(1))
     output = mpmath.cot(input_str)
