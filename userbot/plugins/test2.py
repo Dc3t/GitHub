@@ -3,7 +3,11 @@ import os
 import random
 import shlex
 import math
+import asyncio
+from userbot.utils.decorators import register
+from . import ALIVE_NAME, AUTONAME, BOTLOG, BOTLOG_CHATID, DEFAULT_BIO, get_user_from_event
 
+from telethon.errors.rpcerrorlist import YouBlockedUserError
 from typing import Optional, Tuple
 from PIL import Image, ImageDraw, ImageFont
 import PIL.ImageOps
@@ -296,7 +300,37 @@ async def memes(mafia):
         if files and os.path.exists(files):
             os.remove(files)
 
-
+@iqthon.on(admin_cmd(outgoing=True, pattern=r"^\.wlogo(?: |$)(.*)")
+async def _(event):
+    if event.fwd_from:
+        return
+    aing = await event.client.get_me()
+    text = event.pattern_match.group(1)
+    if not text:
+        await event.edit("`Give a name too!`")
+    else:
+        await event.edit("`Processing`")
+    chat = "@KazukoRobot"
+    async with event.client.conversation(chat) as conv:
+        try:
+            msg = await conv.send_message(f"/logo {text}")
+            response = await conv.get_response()
+            logo = await conv.get_response()
+            """ - don't spam notif - """
+            await event.client.send_read_acknowledge(conv.chat_id)
+        except YouBlockedUserError:
+            await event.edit(
+                "**Error: Mohon Buka Blokir** @KazukoRobot **Dan Coba Lagi Kontol!**"
+            )
+            return
+        await asyncio.sleep(0.5)
+        await event.client.send_file(
+            event.chat_id,
+            logo,
+            caption=f"Logo by [{ALIVE_NAME}](tg://user?id={aing.id})",
+        )
+        await event.client.delete_messages(conv.chat_id, [msg.id, response.id, logo.id])
+        await event.delete()
 @iqthon.on(admin_cmd(outgoing=True, pattern="قلب الصوره$"))
 @iqthon.on(sudo_cmd(pattern="قلب الصوره$", allow_sudo=True))
 async def memes(mafia):
