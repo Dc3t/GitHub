@@ -597,7 +597,7 @@ async def memes(mafia):
     kraken = None
     if mafiasticker.endswith(".tgs"):
         await mafia.edit(
-            "Analyzing this media 🧐 framing this animated sticker!"
+            "تحليل هذه الوسائط!"
         )
         mafiafile = os.path.join("./temp/", "meme.png")
         mafiacmd = (
@@ -660,17 +660,7 @@ async def _(event):
         await event.client.send_file(event.chat_id, response["url"])
         await event.delete()
     except Exception:
-        await event.edit("**Tidak bisa menemukan video asupan.**")
-
-
-@iqthon.on(admin_cmd(outgoing=True, pattern=r"^\.wibu$"))
-async def _(event):
-    try:
-        response = requests.get("https://api-tede.herokuapp.com/api/asupan/wibu").json()
-        await event.client.send_file(event.chat_id, response["url"])
-        await event.delete()
-    except Exception:
-        await event.edit("**Tidak bisa menemukan video wibu.**")
+        await event.edit("**لا يمكن العثور على إدخال الفيديو.**")
 
 
 @iqthon.on(admin_cmd(outgoing=True, pattern=r"^\.chika$"))
@@ -680,16 +670,5 @@ async def _(event):
         await event.client.send_file(event.chat_id, response["url"])
         await event.delete()
     except Exception:
-        await event.edit("**Tidak bisa menemukan video chikakiku.**")
+        await event.edit("**لا يمكن العثور على إدخال الفيديو.**")
 
-
-@iqthon.on(admin_cmd(outgoing=True, pattern=r"^\.bocil$"))
-async def _(event):
-    try:
-        response = requests.get(
-            "https://api-alphabot.herokuapp.com/api/asupan/bocil?apikey=Alphabot"
-        ).json()
-        await event.client.send_file(event.chat_id, response["result"])
-        await event.delete()
-    except Exception:
-        await event.edit("**Tidak bisa menemukan video asupan bocil.**")
