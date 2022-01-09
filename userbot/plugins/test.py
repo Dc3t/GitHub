@@ -5,7 +5,9 @@ from userbot import iqthon
 import random
 from asyncio import sleep
 from ..helpers.functions import deEmojify, hide_inlinebot, waifutxt
-
+from userbot.core.logger import logging
+from ..Config import Config
+from ..core.managers import edit_delete, edit_or_reply
 
 @iqthon.on(admin_cmd(outgoing=True, pattern=r"rst(?: |$)(.*)"))
 async def rastick(animu):
