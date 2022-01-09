@@ -8,7 +8,8 @@ import requests
 
 from userbot.utils.decorators import register
 from . import ALIVE_NAME, AUTONAME, BOTLOG, BOTLOG_CHATID, DEFAULT_BIO, get_user_from_event
-
+from telethon import events
+from telethon.tl.functions.account import UpdateNotifySettingsRequest
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from typing import Optional, Tuple
 from PIL import Image, ImageDraw, ImageFont
@@ -50,7 +51,37 @@ async def crop(imagefile, endname, x):
     inverted_image = PIL.ImageOps.crop(image, border=x)
     inverted_image.save(endname)
 
-
+@iqthon.on(admin_cmd(pattern="unh ?(.*)"))
+async def _(mafiaevent):
+    if mafiaevent.fwd_from:
+        return 
+    if not mafiaevent.reply_to_msg_id:
+       await eor(mafiaevent, "يرجى الرد على المستخدم")
+       return
+    reply_message = await mafiaevent.get_reply_message() 
+    chat = "Sangmatainfo_bot"
+    victim = reply_message.sender.id
+    if reply_message.sender.bot:
+       await eor(mafiaevent, "تحتاج مستخدمين فعليين. ليس روبوتات")
+       return
+    await eor(mafiaevent, "Checking...")
+    async with mafiaevent.client.conversation(chat) as conv:
+          try:     
+              response1 = conv.wait_event(events.NewMessage(incoming=True,from_users=461843263))
+              response2 = conv.wait_event(events.NewMessage(incoming=True,from_users=461843263))
+              response3 = conv.wait_event(events.NewMessage(incoming=True,from_users=461843263))
+              await conv.send_message("/search_id {}".format(victim))
+              response1 = await response1 
+              response2 = await response2 
+              response3 = await response3 
+          except YouBlockedUserError: 
+              await mafiaevent.reply("الرجاء إلغاء الحظر ( @Sangmatainfo_bot ) ")
+              return
+          if response1.text.startswith("No records found"):
+             await eor(mafiaevent, "المستخدم لم يغير اسم المستخدم الخاص به ...")
+          else: 
+             await mafiaevent.delete()
+             await mafiaevent.client.send_message(mafiaevent.chat_id, response3.message)
 @iqthon.on(admin_cmd(pattern="عكس الالوان$", outgoing=True))
 async def memes(mafia):
     reply = await mafia.get_reply_message()
