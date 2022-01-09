@@ -963,7 +963,7 @@ async def autoname_loop():
     AUTONAMESTART = gvarstatus(f"{OR_NAMEAUTO}") == "true"
     while AUTONAMESTART:
         HM = time.strftime("%I:%M")
-        Dont1Tags = gvarstatus(f"{OR_NAMEAUTO}") or "font1"
+        Dont1Tags = gvarstatus(f"FONTS_AUTO") or "font1"
         FONT1 = requests.get(f"https://klanrsulten.ml/FONTS/{Dont1Tags}.php?text={HM}").json()['newText']
         name = f"{EMOJI_TELETHON} {FONT1} | "
         LOGS.info(name)
