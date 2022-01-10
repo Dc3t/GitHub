@@ -749,5 +749,12 @@ async def _(event):
 async def permalink(mention):
     await edit_or_reply(mention, f"https://t.me/rxxrx/17")
 
-
-
+fig18 = ["https://t.me/AAAYLM/2","https://t.me/AAAYLM/3","https://t.me/AAAYLM/4","https://t.me/AAAYLM/5","https://t.me/AAAYLM/6","https://t.me/AAAYLM/7","https://t.me/AAAYLM/8","https://t.me/AAAYLM/9","https://t.me/AAAYLM/10","https://t.me/AAAYLM/11","https://t.me/AAAYLM/12","https://t.me/AAAYLM/13","https://t.me/AAAYLM/14","https://t.me/AAAYLM/15","https://t.me/AAAYLM/16","https://t.me/AAAYLM/17","https://t.me/AAAYLM/18","https://t.me/AAAYLM/19","https://t.me/AAAYLM/20","https://t.me/AAAYLM/21","https://t.me/AAAYLM/22","https://t.me/AAAYLM/23","https://t.me/AAAYLM/24","https://t.me/AAAYLM/25","https://t.me/AAAYLM/26","https://t.me/AAAYLM/27","https://t.me/AAAYLM/28","https://t.me/AAAYLM/29","https://t.me/AAAYLM/30","https://t.me/AAAYLM/31","https://t.me/AAAYLM/32","https://t.me/AAAYLM/33","https://t.me/AAAYLM/34","https://t.me/AAAYLM/35","https://t.me/AAAYLM/40","https://t.me/AAAYLM/39","https://t.me/AAAYLM/37","https://t.me/AAAYLM/38","https://t.me/AAAYLM/40","https://t.me/AAAYLM/41","https://t.me/AAAYLM/42","https://t.me/AAAYLM/43","https://t.me/AAAYLM/44","https://t.me/AAAYLM/45","https://t.me/AAAYLM/46","https://t.me/AAAYLM/47","https://t.me/AAAYLM/48","https://t.me/AAAYLM/49","https://t.me/AAAYLM/50","https://t.me/AAAYLM/51","https://t.me/AAAYLM/52","https://t.me/AAAYLM/53","https://t.me/AAAYLM/54","https://t.me/AAAYLM/55","https://t.me/AAAYLM/56","https://t.me/AAAYLM/57","https://t.me/AAAYLM/58","https://t.me/AAAYLM/59","https://t.me/AAAYLM/60","https://t.me/AAAYLM/61","https://t.me/AAAYLM/62","https://t.me/AAAYLM/63","https://t.me/AAAYLM/64","https://t.me/AAAYLM/65","https://t.me/AAAYLM/66","https://t.me/AAAYLM/67","https://t.me/AAAYLM/68","https://t.me/AAAYLM/69","https://t.me/AAAYLM/70","https://t.me/AAAYLM/71","https://t.me/AAAYLM/72","https://t.me/AAAYLM/73","https://t.me/AAAYLM/74","https://t.me/AAAYLM/75","https://t.me/AAAYLM/76","https://t.me/AAAYLM/77","https://t.me/AAAYLM/78","https://t.me/AAAYLM/79","https://t.me/AAAYLM/80","https://t.me/AAAYLM/81","https://t.me/AAAYLM/82","https://t.me/AAAYLM/83","https://t.me/AAAYLM/84","https://t.me/AAAYLM/85","https://t.me/AAAYLM/86","https://t.me/AAAYLM/87","https://t.me/AAAYLM/88","https://t.me/AAAYLM/89","https://t.me/AAAYLM/90","https://t.me/AAAYLM/90","https://t.me/AAAYLM/91","https://t.me/AAAYLM/92","https://t.me/AAAYLM/93","https://t.me/AAAYLM/94","https://t.me/AAAYLM/95","https://t.me/AAAYLM/96","https://t.me/AAAYLM/97","https://t.me/AAAYLM/98","https://t.me/AAAYLM/99","https://t.me/AAAYLM/100",]
+@iqthon.on(admin_cmd(outgoing=True, pattern="متحركه18$"))
+async def iqvois(vois):
+    if vois.fwd_from:
+        return
+    Ti = await rd(vois)
+    if iqvois3:
+        await vois.client.send_file(vois.chat_id, fig18, reply_to=Ti)
+        await vois.delete()
