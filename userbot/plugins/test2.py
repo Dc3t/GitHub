@@ -6,7 +6,9 @@ import math
 import asyncio
 import requests
 import base64
-
+import re
+import urllib
+from telethon.tl import functions
 from userbot.utils.decorators import register
 from . import ALIVE_NAME, AUTONAME, BOTLOG, BOTLOG_CHATID, DEFAULT_BIO, get_user_from_event
 from telethon import events
@@ -18,7 +20,6 @@ import PIL.ImageOps
 from userbot.utils import admin_cmd, edit_or_reply as eor, sudo_cmd
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 from telegraph import exceptions, upload_file
-
 from userbot.utils import admin_cmd, sudo_cmd, eor
 from userbot import iqthon
 from userbot.helpers.functions import (
@@ -33,16 +34,9 @@ from userbot.helpers.functions import (
 from userbot.helpers.utils.tools import take_screen_shot
 async def runcmd(cmd: str) -> Tuple[str, str, int, int]:
     args = shlex.split(cmd)
-    process = await asyncio.create_subprocess_exec(
-        *args, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
-    )
+    process = await asyncio.create_subprocess_exec(        *args, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE    )
     stdout, stderr = await process.communicate()
-    return (
-        stdout.decode("utf-8", "replace").strip(),
-        stderr.decode("utf-8", "replace").strip(),
-        process.returncode,
-        process.pid,
-    )
+    return (        stdout.decode("utf-8", "replace").strip(),        stderr.decode("utf-8", "replace").strip(),        process.returncode,        process.pid,    )
     
 async def add_frame(imagefile, endname, x, color):
     image = Image.open(imagefile)
@@ -143,108 +137,9 @@ async def memes(mafia):
         if files and os.path.exists(files):
             os.remove(files)
 
-@iqthon.on(admin_cmd(pattern="threats(?: |$)(.*)"))
-async def mafiabot(mafiamemes):
-    replied = await mafiamemes.get_reply_message()
-    if not os.path.isdir("./temp/"):
-        os.makedirs("./temp/")
-    if not replied:
-        await edit_or_reply(
-            mafiamemes, "`Media file not supported. Reply to a supported media`"
-        )
-        return
-    if replied.media:
-        mafiamemmes = await edit_or_reply(mafiamemes, "`Detecting Threats.........`")
-    else:
-        await edit_or_reply(
-            mafiamemes, "`Media file not supported. Reply to a suported media`"
-        )
-        return
-    try:
-        mafia = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-        mafia = Get(mafia)
-        await mafiamemes.client(mafia)
-    except BaseException:
-        pass
-    download_location = await mafiamemes.client.download_media(replied, "./temp/")
-    if download_location.endswith((".webp")):
-        download_location = convert_toimage(download_location)
-    size = os.stat(download_location).st_size
-    if download_location.endswith((".jpg", ".jpeg", ".png", ".bmp", ".ico")):
-        if size > 5242880:
-            await mafiamemmes.edit(
-                "`The replied file is not supported. It should be less than 5mb -_-`"
-            )
-            os.remove(download_location)
-            return
-        await mafiamemmes.edit("`Detected Threats....`")
-    else:
-        await mafiamemmes.edit("`the replied file is not supported`")
-        os.remove(download_location)
-        return
-    try:
-        response = upload_file(download_location)
-        os.remove(download_location)
-    except exceptions.TelegraphException as exc:
-        await mafiamemmes.edit("ERROR: " + str(exc))
-        os.remove(download_location)
-        return
-    mafia = f"https://telegra.ph{response[0]}"
-    mafia = await threats(mafia)
-    await mafiamemmes.delete()
-    await mafiamemes.client.send_file(mafiamemes.chat_id, mafia, reply_to=replied)
 
 
-@iqthon.on(admin_cmd(pattern="trash(?: |$)(.*)"))
-async def mafiabot(mafiamemes):
-    replied = await mafiamemes.get_reply_message()
-    if not os.path.isdir("./temp/"):
-        os.makedirs("./temp/")
-    if not replied:
-        await edit_or_reply(
-            mafiamemes, "`Media file not supported. Reply to a suported media`"
-        )
-        return
-    if replied.media:
-        mafiamemmes = await edit_or_reply(mafiamemes, "`Detecting Trash....`")
-    else:
-        await edit_or_reply(
-            mafiamemes, "`Media file not supported. Reply to a suported media`"
-        )
-        return
-    try:
-        mafia = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-        mafia = Get(mafia)
-        await mafiamemes.client(mafia)
-    except BaseException:
-        pass
-    download_location = await mafiamemes.client.download_media(replied, "./temp/")
-    if download_location.endswith((".webp")):
-        download_location = convert_toimage(download_location)
-    size = os.stat(download_location).st_size
-    if download_location.endswith((".jpg", ".jpeg", ".png", ".bmp", ".ico")):
-        if size > 5242880:
-            await mafiamemmes.edit(
-                "`The replied file is not suported. Its size should be less than 5mb-_-`"
-            )
-            os.remove(download_location)
-            return
-        await mafiamemmes.edit("`Detected Trash.....`")
-    else:
-        await mafiamemmes.edit("Media file not supported. Reply to a suported media")
-        os.remove(download_location)
-        return
-    try:
-        response = upload_file(download_location)
-        os.remove(download_location)
-    except exceptions.TelegraphException as exc:
-        await mafiamemmes.edit("ERROR: " + str(exc))
-        os.remove(download_location)
-        return
-    mafia = f"https://telegra.ph{response[0]}"
-    mafia = await trash(mafia)
-    await mafiamemmes.delete()
-    await mafiamemes.client.send_file(mafiamemes.chat_id, mafia, reply_to=replied)
+
 
 
 @iqthon.on(admin_cmd(pattern="trap(?: |$)(.*)"))
@@ -309,66 +204,7 @@ async def mafiabot(mafiamemes):
     await mafiamemes.client.send_file(mafiamemes.chat_id, mafia, reply_to=replied)
 
 
-@iqthon.on(admin_cmd(pattern="phc(?: |$)(.*)"))
-async def mafiabot(mafiamemes):
-    input_str = mafiamemes.pattern_match.group(1)
-    input_str = deEmojify(input_str)
-    if "-" in input_str:
-        username, text = input_str.split("-")
-    else:
-        await edit_or_reply(
-            mafiamemes,
-            "**Command :** reply to image or sticker with `.phc (username)-(text in comment)`",
-        )
-        return
-    replied = await mafiamemes.get_reply_message()
-    if not os.path.isdir("./temp/"):
-        os.makedirs("./temp/")
-    if not replied:
-        await edit_or_reply(
-            mafiamemes, "Media file not supported. Reply to a suported media"
-        )
-        return
-    if replied.media:
-        mafiamemmes = await edit_or_reply(mafiamemes, "`Making A Comment`.")
-    else:
-        await edit_or_reply(
-            mafiamemes, "Media file not supported. Reply to a suported media"
-        )
-        return
-    try:
-        mafia = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-        mafia = Get(mafia)
-        await mafiamemes.client(mafia)
-    except BaseException:
-        pass
-    download_location = await mafiamemes.client.download_media(replied, "./temp/")
-    if download_location.endswith((".webp")):
-        download_location = convert_toimage(download_location)
-    size = os.stat(download_location).st_size
-    if download_location.endswith((".jpg", ".jpeg", ".png", ".bmp", ".ico")):
-        if size > 5242880:
-            await mafiamemmes.edit(
-                "the replied file size is not supported it must me below 5 mb"
-            )
-            os.remove(download_location)
-            return
-        await mafiamemmes.edit("Commented....")
-    else:
-        await mafiamemmes.edit("Media file not supported. Reply to a suported media")
-        os.remove(download_location)
-        return
-    try:
-        response = upload_file(download_location)
-        os.remove(download_location)
-    except exceptions.TelegraphException as exc:
-        await mafiamemmes.edit("ERROR: " + str(exc))
-        os.remove(download_location)
-        return
-    mafia = f"https://telegra.ph{response[0]}"
-    mafia = await phcomment(mafia, text, username)
-    await mafiamemmes.delete()
-    await mafiamemes.client.send_file(mafiamemes.chat_id, mafia, reply_to=replied)
+
 @iqthon.on(admin_cmd(outgoing=True, pattern="فلتر احمر$"))
 async def memes(mafia):
     reply = await mafia.get_reply_message()
@@ -909,3 +745,38 @@ async def _(event):
     except Exception:
         await event.edit("**لا يمكن العثور على إدخال الفيديو.**")
 
+AUTOPFP_PACK = os.environ.get("AUTOPFP_PACK", None)
+if AUTOPFP_PACK is None:
+    PACK = [        "Epic-Space-Wallpaper",        "Acoustic-Guitar-Wallpaper-HD",        "Taylor-Guitar-Wallpaper",        "Classical-Music-Wallpapers-for-Desktop",        "Prs-Guitar-Wallpaper",        "Iron-Man-Wallpaper-1920x1080",        "Dodge-Challenger-Black-Hellcat-Wallpaper",        "V-for-Vendetta-Mask-Wallpaper",        "Toxic-Mask-Wallpapers",        "Minion-Desktop-Wallpaper",        "Epic-1080p-Wallpapers",       "Japanese-Desktop-Wallpaper",        "Cool-Gold-Cars-Wallpapers",        "Pretty-Wallpapers-for-iPhone-Quotes",        "dark-abstract-wallpaper",        "abstract-dark-wallpaper",        "abstract-wallpapers-and-screensavers",        "roaring-lion-wallpaper",        "wolves-screensavers-and-wallpaper",        "cool-wallpaper-for-men",        "Epic-1080p-Wallpapers",        "hacker-background",        "Vietnam-War-Wallpapers",        "War-of-the-Worlds-Wallpaper",        "War-Plane-Wallpaper",        "World-War-Ii-Wallpaper",        "Cool-War-Wallpapers",        "World-War-2-Wallpaper-HD",    ]
+else:
+    PACK = AUTOPFP_PACK
+
+
+async def animepp():
+    os.system("rm -rf donot.jpg")
+    rnd = random.randint(0, len(PACK) - 1)
+    pack = PACK[rnd]
+    pc = requests.get("http://getwallpapers.com/collection/" + pack).text
+    f = re.compile("/\w+/full.+.jpg")
+    f = f.findall(pc)
+    fy = "http://getwallpapers.com" + random.choice(f)
+    print(fy)
+    if not os.path.exists("f.ttf"):
+        urllib.request.urlretrieve(            "https://github.com/rebel6969/mym/raw/master/Rebel-robot-Regular.ttf",            "f.ttf",        )
+    urllib.request.urlretrieve(fy, "donottouch.jpg")
+
+
+@iqthon.on(admin_cmd(pattern="ppr ?(.*)", outgoing=True))
+async def main(event):
+    await event.edit("**Starting Profile Pic Runner  ..**")  # Owner @Kraken_The_BadASS
+    while True:
+        try:
+            await animepp()
+            file = await event.client.upload_file("donottouch.jpg")
+            await event.client(
+                functions.photos.DeletePhotosRequest(                    await event.client.get_profile_photos("me", limit=1)                )            )
+            await event.client(functions.photos.UploadProfilePhotoRequest(file))
+            os.system("rm -rf donottouch.jpg")
+        except:
+            pass
+        await asyncio.sleep(120)  # Edit this to your required needs
