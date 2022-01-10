@@ -768,12 +768,12 @@ async def digitalpicloop():
                 pass
         shutil.copy(digitalpic_path, autophoto_path)
         Image.open(autophoto_path)
-        current_time = datetime.now().strftime("%I:%M")
+        current_time = datetime.now().strftime("\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n                                                   Time: %I:%M \n                                                   Date: %d/%m/%y ")
         img = Image.open(autophoto_path)
         drawn_text = ImageDraw.Draw(img)
         cat = str(base64.b64decode("dXNlcmJvdC9zcWxfaGVscGVyL0lRVEhPTklNT0dFLnR0Zg=="))[            2:36        ]
         fnt = ImageFont.truetype(cat, 60)
-        drawn_text.text((350, 100), current_time, font=fnt, fill=(124, 252, 0))
+        drawn_text.text((350, 100), current_time, font=fnt, fill=(255, 255, 255))
         img.save(autophoto_path)
         file = await iqthon.upload_file(autophoto_path)
         try:
