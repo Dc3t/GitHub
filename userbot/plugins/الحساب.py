@@ -768,7 +768,7 @@ async def digitalpicloop():
                 pass
         shutil.copy(digitalpic_path, autophoto_path)
         Image.open(autophoto_path)
-        current_time = datetime.now().strftime("\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n                                                   Time: %I:%M \n                                                   Date: %d/%m/%y ")
+        current_time = datetime.now().strftime("%I:%M")
         img = Image.open(autophoto_path)
         drawn_text = ImageDraw.Draw(img)
         cat = str(base64.b64decode("dXNlcmJvdC9zcWxfaGVscGVyL0lRVEhPTklNT0dFLnR0Zg=="))[            2:36        ]
